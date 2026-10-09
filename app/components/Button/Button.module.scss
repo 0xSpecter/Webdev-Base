@@ -1,3 +1,5 @@
+@use "constants" as *;
+
 .button {
   // Text color on variants without a colored background.
   --text-color: var(--color);
@@ -100,3 +102,5 @@
 .sharp {
   border-radius: 0;
 }
+
+@include fonts;

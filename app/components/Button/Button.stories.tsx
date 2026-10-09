@@ -16,8 +16,8 @@ const meta = {
 		...stylingArgTypes,
 		onClick: { action: "clicked" },
 	},
-	render: ({ variant, color, size, rounded, ...props }) => (
-		<Button {...props} styling={collectStyle(variant, color, size, rounded)} />
+	render: ({ variant, color, size, rounded, font, weight, slant, ...props }) => (
+		<Button {...props} styling={collectStyle(variant, color, size, rounded, font, weight, slant)} />
 	),
 } satisfies Meta<StylingArgs<typeof Button>>;
 

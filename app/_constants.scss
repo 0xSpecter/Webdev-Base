@@ -7,3 +7,58 @@ $navbar-reserved-space: $navbar-height + $navbar-margin * 2;
     @content;
   }
 }
+
+// Font classes for components that use the styling system (see fonts, weights and slants in utils.ts).
+@mixin fonts {
+  .mono {
+    font-family: var(--font);
+  }
+
+  .paragraph {
+    font-family: var(--font-paragraph);
+  }
+
+  .header {
+    font-family: var(--font-header);
+  }
+
+  .code {
+    font-family: var(--font-code);
+  }
+
+  .data {
+    font-family: var(--font-data);
+  }
+
+  .comic {
+    font-family: var(--font-comic);
+  }
+
+  .pixel {
+    font-family: var(--font-pixel);
+  }
+
+  .kode {
+    font-family: var(--font-kode);
+  }
+
+  .byte {
+    font-family: var(--font-byte);
+  }
+
+  .normal {
+    font-weight: 400;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .upright {
+    font-style: normal;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+}

@@ -15,8 +15,8 @@ const meta = {
 	argTypes: {
 		...stylingArgTypes,
 	},
-	render: ({ variant, color, size, rounded, ...props }) => (
-		<Card {...props} styling={collectStyle(variant, color, size, rounded)} />
+	render: ({ variant, color, size, rounded, font, weight, slant, ...props }) => (
+		<Card {...props} styling={collectStyle(variant, color, size, rounded, font, weight, slant)} />
 	),
 } satisfies Meta<StylingArgs<typeof Card>>;
 

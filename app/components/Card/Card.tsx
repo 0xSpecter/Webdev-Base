@@ -16,6 +16,9 @@ export default function Card({
 		color: 'default',
 		size: 'md',
 		rounded: 'rounded',
+		font: 'mono',
+		weight: 'normal',
+		slant: 'upright',
 	},
 }: CardProps) {
 	return (

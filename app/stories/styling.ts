@@ -1,5 +1,5 @@
 import type { ComponentProps, JSXElementConstructor } from "react";
-import { colors, roundeds, sizes, style, variants, type Styling, type Variant, type Color, type Rounded, type Size } from "~/utils";
+import { colors, fonts, roundeds, sizes, slants, style, variants, weights, type Styling, type Variant, type Color, type Rounded, type Size, type Font, type Weight, type Slant } from "~/utils";
 
 // Magic
 export type StylingArgs<C extends JSXElementConstructor<any>> = ComponentProps<C> & Styling;
@@ -10,6 +10,9 @@ export const stylingArgTypes = {
 	color: { control: "inline-radio", options: colors },
 	size: { control: "inline-radio", options: sizes },
 	rounded: { control: "inline-radio", options: roundeds },
+	font: { control: "select", options: fonts },
+	weight: { control: "inline-radio", options: weights },
+	slant: { control: "inline-radio", options: slants },
 	styling: { table: { disable: true } },
 } as const;
 
@@ -21,6 +24,9 @@ export function collectStyle(
 	color: Color,
 	size: Size,
 	rounded: Rounded,
+	font: Font,
+	weight: Weight,
+	slant: Slant,
 ): Styling {
-	return { variant, color, size, rounded }
+	return { variant, color, size, rounded, font, weight, slant }
 }
