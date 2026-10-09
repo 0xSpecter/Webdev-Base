@@ -16,53 +16,65 @@ npm run dev
 | Page      | `http://localhost:3000` |
 | Storybook | `http://localhost:6006` |
 
-### Scripts
+### Spesial Scripts
 
 | Script                    | Does                                                |
 | ------------------------- | --------------------------------------------------- |
 | `npm run dev`             | Dev server + Storybook                              |
-| `npm run storybook`       | Storybook only                                      |
-| `npm run typecheck`       | Generates route types, then runs `tsc`              |
-| `npm run build`           | Builds the static site to `build/client`            |
-| `npm run start`           | Serves the built site on port 3000                  |
-| `npm run build-storybook` | Builds Storybook to `storybook-static`              |
 
 ## Starting a new project
 
 1. Set `name` in `package.json`.
-2. Set `common.brand` in `app/i18n/locales/*.json` (shown in the navbar and footer).
-3. Replace the placeholder links in `app/components/Navbar/Navbar.tsx`.
-4. Put your domain in `public/CNAME`, or delete the file if you don't use a custom domain.
-5. Adjust the colors and fonts in `app/theme.scss`, and trim the font list in `app/root.tsx` to the ones you use.
-6. Using Firebase? Copy `.example.env` to `.env` and fill in the keys. Not using it? Delete `app/domain/firebase` and `app/providers`.
+2. Put your domain in `public/CNAME`.
+3. Using Firebase? Copy `.example.env` to `.env` and fill in the keys, else delete `app/domain/firebase`.
 
 ## Structure
 
 ```
 app/
-  components/   One folder per component: .tsx, .module.scss, .stories.tsx
-  domain/       Data layer (Firebase setup, queries, mutations)
-  hooks/        useTheme, useLocalStorageItem
-  i18n/         i18next setup and locales (en, nb)
-  layouts/      Navbar + page + footer shell
-  routes/       One folder per route
-  routes.ts     Route config
-  root.tsx      HTML shell, fonts, error boundary
-  theme.scss    Colors and fonts as CSS variables
-  _constants.scss  Sass variables and the `phone` breakpoint mixin
+
+    components/   One folder per component: .tsx, .module.scss, .stories.tsx
+        button/
+            Button.tsx
+            Button.module.scss
+            Button.stories.tsx
+
+    domain/                         Data layer
+        firebase/                   Firebase example of a data layer module
+            firebase.ts 
+            firestore.ts
+            mutations.ts
+            queries.ts
+            queryKeys.ts
+            types.ts
+            utils.ts
+            index.ts
+        index.ts
+        utils.ts
+
+    hooks/                          Hooks
+
+    i18n/                           i18next setup and locales (en, nb)
+
+    layouts/                        Layouts that wrap pages
+
+    routes/                         One folder per route
+        home/
+            home.tsx                
+            home.module.scss
+
+    routes.ts                       Route config
+
+    root.tsx                        HTML shell, fonts, error boundary
+
+    theme.scss                      Colors and fonts as CSS variables
+
+    _constants.scss                 Sass variables
 ```
 
 `~/` is an alias for `app/`.
 
 ## How things work
-
-### Theme
-
-Colors are CSS variables in `app/theme.scss`: `:root` holds the light theme, `:root.dark` overrides only the values that differ. `useTheme` puts `light` or `dark` on `<html>`, saves the choice in `localStorage`, and falls back to the system preference. Storybook's theme switcher uses the same classes.
-
-### Translations
-
-Add keys to `en.json` first — the `t()` key types are generated from it — then add the same keys to `nb.json`. The chosen language is saved in `localStorage`.
 
 ### Pages
 
