@@ -30,7 +30,7 @@ npm run dev
 
 ## Structure
 
-```
+```bash
 app/
 
     components/   One folder per component: .tsx, .module.scss, .stories.tsx
