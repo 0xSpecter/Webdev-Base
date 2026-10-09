@@ -2,13 +2,13 @@
 import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname = import.meta.dirname;
 
 export default defineConfig({
-	plugins: [reactRouter()],
+	// The React Router plugin breaks the Storybook tests, which run through Vitest.
+	plugins: [!process.env.VITEST && reactRouter()],
 	base: '/',
 	resolve: {
 		tsconfigPaths: true

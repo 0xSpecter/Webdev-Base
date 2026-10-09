@@ -33,14 +33,14 @@ npm run dev
 ```bash
 app/
 
-    components/                     #One folder per component: .tsx, .module.scss, .stories.tsx
+    components/                     # One folder per component: .tsx, .module.scss, .stories.tsx
         button/
             Button.tsx
             Button.module.scss
             Button.stories.tsx
 
-    domain/                         #Data layer
-        firebase/                   #Firebase example of a data layer module
+    domain/                         # Data layer
+        firebase/                   # Firebase example of a data layer module
             firebase.ts 
             firestore.ts
             mutations.ts
@@ -52,24 +52,26 @@ app/
         index.ts
         utils.ts
 
-    hooks/                          #Hooks
+    hooks/                          # Hooks
 
-    i18n/                           #i18next setup and locales (en, nb)
+    i18n/                           # i18next setup and locales (en, nb)
 
-    layouts/                        #Layouts that wrap pages
+    layouts/                        # Layouts that wrap pages
 
-    routes/                         #One folder per route
+    routes/                         # One folder per route
         home/
             home.tsx                
             home.module.scss
 
-    routes.ts                       #Route config
+    stories/                        # Component intependent stories
 
-    root.tsx                        #HTML shell, fonts, error boundary
+    routes.ts                       # Route config
 
-    theme.scss                      #Colors and fonts as CSS variables
+    root.tsx                        # HTML shell, fonts, error boundary
 
-    _constants.scss                 #Sass variables
+    theme.scss                      # Colors and fonts as CSS variables
+
+    _constants.scss                 # Sass variables
 ```
 
 `~/` is an alias for `app/`.

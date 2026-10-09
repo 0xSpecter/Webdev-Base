@@ -1,31 +1,102 @@
-@use "sass:map";
-
 .button {
+  // Text color on variants without a colored background.
+  --text-color: var(--color);
   border: none;
-  font-weight: 500;
   cursor: pointer;
-  background: var(--primary);
-  color: var(--on-primary);
+
+  &:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 4px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.content {
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+// Neutral: the surface colors are too faint to use as a ring or text color.
+.default {
+  --color: var(--surface-alt);
+  --on-color: var(--text);
+  --text-color: var(--text);
+}
+
+.primary {
+  --color: var(--primary);
+  --on-color: var(--on-primary);
+}
+
+.secondary {
+  --color: var(--secondary);
+  --on-color: var(--on-secondary);
+}
+
+.tertiary {
+  --color: var(--tertiary);
+  --on-color: var(--on-tertiary);
+}
+
+.accent {
+  --color: var(--accent);
+  --on-color: var(--on-accent);
+}
+
+.filled {
+  background: var(--color);
+  color: var(--on-color);
+}
+
+.border {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: inset 0 0 0 2px var(--color);
+}
+
+.outline {
+  background: transparent;
+  color: var(--text-color);
+  box-shadow: inset 0 0 0 2px var(--color);
 }
 
 .sm {
-  padding: 0.125rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   font-size: 0.875rem;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
 }
 
 .md {
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   font-size: 1rem;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 .lg {
   padding: 0.5rem 1.25rem;
   font-size: 1.125rem;
-  border-radius: 1rem;
+  border-radius: .5rem;
 }
 
-.boxy {
+.xl {
+  padding: 0.75rem 1.75rem;
+  font-size: 1.25rem;
+  border-radius: .65rem;
+}
+
+.xxl {
+  padding: 1rem 2.25rem;
+  font-size: 1.8rem;
+  border-radius: .75rem;
+}
+
+.sharp {
   border-radius: 0;
 }

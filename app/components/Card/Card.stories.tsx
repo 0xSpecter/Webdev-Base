@@ -1,25 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Button from "./Button";
+import Card from "./Card";
 import { stylingArgs, stylingArgTypes, type StylingArgs, collectStyle } from "~/stories/styling";
 
 const meta = {
-	title: "Components/Button",
-	component: Button,
+	title: "Components/Card",
+	component: Card,
 	parameters: {
 		layout: "centered",
 	},
 	args: {
-		children: "Button",
-		...stylingArgs(),
+		children: "Card",
+		...stylingArgs("border", "default"),
 	},
 	argTypes: {
 		...stylingArgTypes,
-		onClick: { action: "clicked" },
 	},
 	render: ({ variant, color, size, rounded, ...props }) => (
-		<Button {...props} styling={collectStyle(variant, color, size, rounded)} />
+		<Card {...props} styling={collectStyle(variant, color, size, rounded)} />
 	),
-} satisfies Meta<StylingArgs<typeof Button>>;
+} satisfies Meta<StylingArgs<typeof Card>>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

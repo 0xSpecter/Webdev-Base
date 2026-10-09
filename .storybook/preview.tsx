@@ -3,6 +3,15 @@ import { MemoryRouter } from 'react-router'
 import { withThemeByClassName } from '@storybook/addon-themes'
 import '../app/app.scss'
 import '../app/i18n/i18n'
+import { fontsHref } from '../app/fonts'
+
+// The app loads its fonts through root.tsx, which Storybook never renders.
+if (!document.querySelector(`link[href="${fontsHref}"]`)) {
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = fontsHref
+  document.head.appendChild(link)
+}
 
 const preview: Preview = {
   decorators: [

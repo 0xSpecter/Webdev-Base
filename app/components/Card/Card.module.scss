@@ -1,0 +1,43 @@
+.card {
+  --border-color: transparent;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--border-color);
+  background: var(--surface);
+}
+
+.filled {
+  --border-color: transparent !important;
+}
+
+
+.outline {
+  background: transparent;
+}
+
+.default {
+  --border-color: var(--surface-alt);
+}
+
+.primary {
+  --border-color: var(--primary);
+}
+
+.secondary {
+  --border-color: var(--secondary);
+}
+
+.tertiary {
+  --border-color: var(--tertiary);
+}
+
+.accent {
+  --border-color: var(--accent);
+}
+
+.rounded {
+  border-radius: 0.75rem;
+}
+
+.sharp {
+  border-radius: 0rem;
+}
