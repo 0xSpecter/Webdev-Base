@@ -1,0 +1,77 @@
+@use "constants" as *;
+
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  margin: $navbar-margin;
+  min-height: $navbar-height;
+  padding: 0.25rem 2rem;
+  border-radius: 0rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1rem;
+
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
+
+  @include phone {
+    padding-inline: 1.5rem;
+  }
+}
+
+.brand {
+  margin-right: auto;
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @include phone {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    padding-block: 0.5rem;
+
+    &.open {
+      display: flex;
+    }
+  }
+}
+
+.link,
+.menu {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: rgb(0 0 0 / 10%);
+  }
+}
+
+.link {
+  display: block;
+}
+
+.menu {
+  display: none;
+  font-size: 1.25rem;
+  line-height: 1;
+
+  @include phone {
+    display: block;
+  }
+}

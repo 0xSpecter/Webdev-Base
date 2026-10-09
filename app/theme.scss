@@ -1,0 +1,49 @@
+:root {
+  --font: "Roboto Mono", monospace;
+  --font-paragraph: "Courier Prime", monospace;
+  --font-header: "Bebas Neue", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
+  --font-data: "Datatype", monospace;
+  --font-comic: "Comic Relief", system-ui;
+  --font-pixel: "VT323", monospace;
+  --font-kode: "Kode Mono", monospace;
+  --font-byte: "Bytesized", sans-serif;
+
+  --color-derive: #f5f5f5;
+  --color-invert: rgb(from var(--surface) calc(255 - r) calc(255 - g) calc(255 - b));
+
+  --background: var(--color-derive);
+  --surface: #EEEFF1;
+  --surface-alt: #e5e7eb;
+  --surface-border: var(--surface-alt);
+
+  --text: var(--color-invert);
+  --text-invert: var(--color-derive);
+  --text-muted: rgb(from var(--text) r g b / 60%);
+
+  --primary: #387d6c;
+  --on-primary: var(--text-invert);
+  --secondary: #7C3D8F;
+  --on-secondary: var(--text-invert);
+  --tertiary: #7494EA;
+  --on-tertiary: var(--text);
+  --accent: #F9627D;
+  --on-accent: var(--text-invert);
+
+  --error: #FE4A49;
+  --on-error: var(--text);
+}
+
+:root.dark {
+  --color-derive: #1A202C;
+
+  --surface: #222A38;
+  --surface-alt: #2D3748;
+
+  --primary: #76c2af;
+  --secondary: #EDC9FF;
+  --tertiary: #6564DB;
+  --accent: #FF47A0;
+
+  --error: #CE4760;
+}

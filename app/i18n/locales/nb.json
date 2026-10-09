@@ -1,0 +1,32 @@
+{
+	"common": {
+		"loading": "Laster…",
+		"cancel": "Avbryt",
+		"name": "Navn",
+		"comingSoon": "Kommer snart",
+		"brand": "Navn Her"
+	},
+	"navbar": {
+		"menu": "Meny",
+		"nowhere": "Ikkenoe"
+	},
+	"theme": {
+		"toDark": "Bytt til mørk modus",
+		"toLight": "Bytt til lys modus"
+	},
+	"language": {
+		"switch": "Switch to English"
+	},
+	"home": {
+		"title": "Hjemme",
+		"description": "Din Hjemmeside",
+		"hero": "Hero del her",
+		"content": "Innhold her"
+	},
+	"error": {
+		"oops": "Oi!",
+		"error": "Feil",
+		"unexpected": "Det oppstod en uventet feil.",
+		"notFound": "Fant ikke siden."
+	}
+}

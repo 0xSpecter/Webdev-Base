@@ -1,0 +1,20 @@
+@use "constants" as *;
+
+.errorMain {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1rem;
+  padding-top: 4rem;
+}
+
+.loadingMain {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+}
+
+.stack {
+  width: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+}

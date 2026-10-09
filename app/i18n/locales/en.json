@@ -1,0 +1,32 @@
+{
+	"common": {
+		"loading": "Loading…",
+		"cancel": "Cancel",
+		"name": "Name",
+		"comingSoon": "Coming soon",
+		"brand": "Name Here"
+	},
+	"navbar": {
+		"menu": "Menu",
+		"nowhere": "Nowhere"
+	},
+	"theme": {
+		"toDark": "Switch to dark mode",
+		"toLight": "Switch to light mode"
+	},
+	"language": {
+		"switch": "Bytt til norsk"
+	},
+	"home": {
+		"title": "Home",
+		"description": "Homepage",
+		"hero": "Hero goes here",
+		"content": "Content here"
+	},
+	"error": {
+		"oops": "Oops!",
+		"error": "Error",
+		"unexpected": "An unexpected error occurred.",
+		"notFound": "The requested page could not be found."
+	}
+}

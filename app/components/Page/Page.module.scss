@@ -1,0 +1,12 @@
+@use "constants" as *;
+
+.page {
+  padding-top: $navbar-reserved-space;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.content {
+  min-height: calc(100vh - $navbar-reserved-space);
+  width: 100%;
+}
