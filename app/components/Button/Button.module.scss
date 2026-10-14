@@ -1,19 +1,28 @@
 @use "constants" as *;
+@use "sass:map";
 
 .button {
-  // Text color on variants without a colored background.
-  --text-color: var(--color);
-  border: none;
+  border: 2px solid;
   cursor: pointer;
+  transition: border-radius var(--duration-normal) var(--ease), border-color var(--duration-normal) var(--ease), background var(--duration-normal) var(--ease);
 
-  &:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 4px;
-  }
+  @include focus-ring(var(--text), 4px);
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  @include basic-colors;
+  @include basic-variants;
+  @include basic-rounded;
+  @include basic-shadows;
+  @include basic-texts;
+
+  // Padding grows with the font size.
+  @include sizes using ($key) {
+    font-size: map.get($size-map, $key);
+    padding: calc(map.get($size-map, $key) * 0.3) calc(map.get($size-map, $key) * 0.8);
   }
 }
 
@@ -23,86 +32,4 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-// Neutral: the surface colors are too faint to use as a ring or text color.
-.styling-default {
-  --color: var(--surface-alt);
-  --on-color: var(--text);
-  --text-color: var(--text);
-}
-
-.styling-primary {
-  --color: var(--primary);
-  --on-color: var(--on-primary);
-}
-
-.styling-secondary {
-  --color: var(--secondary);
-  --on-color: var(--on-secondary);
-}
-
-.styling-tertiary {
-  --color: var(--tertiary);
-  --on-color: var(--on-tertiary);
-}
-
-.styling-accent {
-  --color: var(--accent);
-  --on-color: var(--on-accent);
-}
-
-.styling-filled {
-  background: var(--color);
-  color: var(--on-color);
-}
-
-.styling-border {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: inset 0 0 0 2px var(--color);
-}
-
-.styling-outline {
-  background: transparent;
-  color: var(--text-color);
-  box-shadow: inset 0 0 0 2px var(--color);
-}
-
-.styling-sm {
-  padding: 0.2rem 0.6rem;
-  font-size: 0.875rem;
-  border-radius: 0.4rem;
-}
-
-.styling-md {
-  padding: 0.3rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-}
-
-.styling-lg {
-  padding: 0.5rem 1.25rem;
-  font-size: 1.125rem;
-  border-radius: .5rem;
-}
-
-.styling-xl {
-  padding: 0.75rem 1.75rem;
-  font-size: 1.25rem;
-  border-radius: .65rem;
-}
-
-.styling-xxl {
-  padding: 1rem 2.25rem;
-  font-size: 1.8rem;
-  border-radius: .75rem;
-}
-
-.styling-sharp {
-  border-radius: 0;
-}
-
-.button {
-  @include basic-texts;
 }

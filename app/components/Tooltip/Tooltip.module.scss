@@ -6,7 +6,7 @@
 .bubble {
   position: absolute;
   left: 50%;
-  z-index: 10;
+  z-index: var(--z-tooltip);
   padding: 0.25rem 0.6rem;
   border-radius: 0.5rem;
   background: var(--text);

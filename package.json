@@ -7,6 +7,7 @@
 		"dev": "concurrently -n app,storybook -c blue,magenta \"react-router dev\" \"npm run storybook\"",
 		"start": "serve -s build/client -l 3000",
 		"typecheck": "react-router typegen && tsc",
+		"test": "vitest run --project unit",
 		"storybook": "storybook dev -p 6006 --no-open",
 		"build-storybook": "storybook build"
 	},

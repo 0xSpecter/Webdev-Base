@@ -26,6 +26,13 @@ export default defineConfig({
 	test: {
 		projects: [{
 			extends: true,
+			test: {
+				name: 'unit',
+				include: ['app/**/*.test.ts'],
+				environment: 'node',
+			}
+		}, {
+			extends: true,
 			plugins: [
 				storybookTest({
 					configDir: path.join(dirname, '.storybook')

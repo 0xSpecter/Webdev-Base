@@ -1,7 +1,7 @@
 import { motion } from "motion/react"
 import type { ReactNode } from "react";
 import styles from "./Button.module.scss";
-import { stylingClassNames, type Styling } from "~/style";
+import { classNames, type Styling } from "~/style";
 
 interface ButtonProps {
 	children?: ReactNode,
@@ -36,7 +36,7 @@ export default function Button({
 }: ButtonProps) {
 	return (
 		<motion.button type={type}
-			className={`${styles.button} ${stylingClassNames(styles, styling)} ${className}`}
+			className={classNames(styles, styling, styles.button, className)}
 			variants={variants}
 			whileHover={disabled ? undefined : "hover"}
 			whileTap={disabled ? undefined : "tap"}

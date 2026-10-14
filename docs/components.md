@@ -49,6 +49,7 @@ export default function Tag({
 - Use `Pick` to choose which options the component supports. Then TypeScript rejects an option the stylesheet doesn't handle.
 - Put `styles.tag` (the root class) and the styling classes on the **same element**. The mixins generate `.tag.styling-*`, which only matches when both classes are on one element.
 - Put `className` last so callers can add their own classes.
+- `classNames(styles, styling, styles.tag, className)` from `~/style` is shorthand for the same string.
 
 ## Tag.module.scss
 
@@ -135,4 +136,5 @@ export const Outline: Story = {
 - [ ] `Pick<Styling, …>` in the `.tsx`, the mixins in the `.scss`, and `getStylingArgTypes(…)` in the stories all list the same options.
 - [ ] The root class and `stylingClassNames(…)` are on the same element.
 - [ ] Every mixin is included inside the root class.
+- [ ] Spacing, durations and z-index use the tokens from `theme.scss`; focus and hover use `focus-ring` / `hover-overlay`.
 - [ ] The defaults match in the component and the story `args`.

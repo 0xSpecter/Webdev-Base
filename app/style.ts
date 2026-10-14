@@ -32,9 +32,16 @@ export interface Styling {
 // Prefixed so styling classes never collide with a component's own classes. Must match $styling-prefix in _style.scss.
 export const stylingPrefix = 'styling-';
 
+// Values are looked up without their option name, so a key must not appear in two options
+// (e.g. a size and a variant both called 'large'). style.test.ts checks this.
 export function stylingClassNames(styles: CSSModuleClasses, style: Partial<Styling>) {
 	return Object.values(style)
 		.map(item => styles[stylingPrefix + item])
 		.filter(Boolean)
 		.join(" ");
+}
+
+// Styling classes followed by any other class names, e.g. classNames(styles, styling, styles.card, className).
+export function classNames(styles: CSSModuleClasses, styling: Partial<Styling>, ...cns: string[]): string {
+	return [stylingClassNames(styles, styling), ...cns].filter(Boolean).join(" ");
 }

@@ -126,7 +126,7 @@ spacing and the fade transition.
 
 ## Tech
 
-### Always
+### Boilerplate
 
 - [React Router](https://reactrouter.com) (v8, Framework, CSR) + [Vite](https://vite.dev/).
 - [TypeScript](https://www.typescriptlang.org) Makes you not have to guess types.
@@ -139,6 +139,6 @@ and validation.
 - [Storybook](https://storybook.js.org) Build and check components in isolation,
 with a11y checks and [Vitest](https://vitest.dev) story tests.
 
-### Maybe
+### Extensions
 
-- [Firebase](https://firebase.google.com) Db and maybe auth.
+- [Firebase](https://firebase.google.com) easy all in one backend package.

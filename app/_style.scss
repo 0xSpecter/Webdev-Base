@@ -73,12 +73,13 @@ $slant-map: (
   italic: italic,
 );
 
+// Alpha is scaled by --shadow-strength so shadows stay visible on the dark theme.
 $shadow-map: (
   flat: none,
-  soft: 0 1px 3px rgb(0 0 0 / 12%),
-  raised: 0 4px 8px rgb(0 0 0 / 15%),
-  floating: 0 12px 24px rgb(0 0 0 / 20%),
-  sunken: inset 0 2px 4px rgb(0 0 0 / 15%),
+  soft: 0 1px 3px rgb(0 0 0 / calc(12% * var(--shadow-strength))),
+  raised: 0 4px 8px rgb(0 0 0 / calc(15% * var(--shadow-strength))),
+  floating: 0 12px 24px rgb(0 0 0 / calc(20% * var(--shadow-strength))),
+  sunken: inset 0 2px 4px rgb(0 0 0 / calc(15% * var(--shadow-strength))),
 );
 
 // What each variant does with the --color / --on-color set by basic-colors.
@@ -220,4 +221,22 @@ $styling-prefix: 'styling-';
   @include basic-sizes;
   @include basic-shadows;
   @include basic-texts;
+}
+
+// Keyboard focus outline. Defaults to currentColor so it shows on any background.
+@mixin focus-ring($color: currentColor, $offset: 2px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+  }
+}
+
+// Tinted background on hover for buttons without their own background.
+// Uses currentColor, so it darkens on light text and lightens on dark text.
+@mixin hover-overlay {
+  transition: background-color var(--duration-fast) var(--ease);
+
+  &:hover {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+  }
 }

@@ -1,10 +1,10 @@
 @use "constants" as *;
 
 .card {
-  padding: 1rem 1.25rem;
+  padding: var(--space-md) 1.25rem;
   border: 2px solid;
 
-  transition: border-radius 500ms ease-in-out;
+  transition: border-radius var(--duration-normal) var(--ease), border-color var(--duration-normal) var(--ease), background var(--duration-normal) var(--ease);
 
   @include basic-colors;
   @include basic-variants;

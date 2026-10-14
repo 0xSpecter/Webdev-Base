@@ -4,10 +4,11 @@ Components share one set of styling options: variant, color, size and so on. A c
 
 | File                     | Holds                                                         |
 |--------------------------|---------------------------------------------------------------|
-| `app/style.ts`           | Option lists, types, `Styling`, `stylingClassNames`           |
+| `app/style.ts`           | Option lists, types, `Styling`, `stylingClassNames`, `classNames` |
 | `app/_style.scss`        | The same lists as Sass, value maps, and the mixins            |
 | `app/_constants.scss`    | Layout constants; `@forward`s `_style.scss`                   |
-| `app/theme.scss`         | The CSS variables the maps point at (`--primary`, `--font`…)  |
+| `app/theme.scss`         | The CSS variables the maps point at (`--primary`, `--font`…), plus spacing, motion and z-index tokens |
+| `app/style.test.ts`      | Checks that `style.ts` and `_style.scss` agree                |
 | `app/stories/styling.ts` | Storybook controls for the options                            |
 
 ## Options
@@ -33,23 +34,27 @@ Variants:
 ## How it fits together
 
 1. A component accepts `styling`, for example `{ variant: 'border', color: 'primary' }`.
-2. `stylingClassNames(styles, styling)` turns each value into its CSS module class: `styling-border`, `styling-primary`. Missing classes are skipped.
+2. `stylingClassNames(styles, styling)` turns each value into its CSS module class: `styling-border`, `styling-primary`. Missing classes are skipped. `classNames(styles, styling, ...others)` does the same and appends other classes, e.g. `classNames(styles, styling, styles.card, className)`.
 3. In the component's `.module.scss`, the mixins output a rule for every key, nested under the root class: `.card.styling-border { … }`.
 
 The `styling-` prefix keeps these classes from clashing with the component's own classes, such as `.content` or `.default`. It's defined twice, as `stylingPrefix` in `style.ts` and as `$styling-prefix` in `_style.scss`, and the two must match.
 
+Classes are named by value only, not by option, so a key may appear in only one option. A size and a variant both called `large` would produce the same class.
+
 ## Keeping the lists in sync
 
-The keys are written twice: once as the arrays in `style.ts` (used for types and Storybook controls), and once as the `$*_keys` lists in `_style.scss` (used to generate classes). Nothing checks that they match. If you add a key, add it in:
+The keys are written twice: once as the arrays in `style.ts` (used for types and Storybook controls), and once as the `$*_keys` lists in `_style.scss` (used to generate classes). If you add a key, add it in:
 
 1. the array in `style.ts`
 2. the `$*_keys` list in `_style.scss`
 3. every map for that option in `_style.scss`
 
-Errors here are silent:
+Mistakes here don't break the build:
 
 - **A key missing from the Sass list:** no class is generated, so choosing that value does nothing.
 - **A key missing from a map:** `map.get` returns null, Sass drops the declaration, and the class comes out empty.
+
+`npm test` catches both. `app/style.test.ts` compiles `_style.scss` and checks every `$*_keys` list and every map against the arrays in `style.ts`. It also checks that the prefixes match and that no key appears in two options. If you add a new option, add it to the `options` table in the test.
 
 ## Mixins
 
@@ -103,6 +108,15 @@ To generate only some keys, call `classes` directly. Quote each key separately; 
 }
 ```
 
+### Interaction
+
+| Mixin                          | Does                                                                 |
+|--------------------------------|----------------------------------------------------------------------|
+| `focus-ring($color, $offset)`  | 2px `:focus-visible` outline. Defaults: `currentColor`, `2px`         |
+| `hover-overlay`                | 12% `currentColor` tint on hover, with a transition. For buttons that have no background of their own |
+
+`hover-overlay` sets `background` on hover, so don't combine it with `basic-variants`.
+
 ### Maps
 
 | Map                         | Key → value                                |
@@ -126,6 +140,20 @@ Custom properties need interpolation, because Sass passes their values through a
 --color: map.get($color-map, $key);      // outputs the text "map.get(...)"
 ```
 
+## Tokens
+
+`theme.scss` also defines tokens to use in place of literal values:
+
+| Token                                           | Value                         |
+|-------------------------------------------------|-------------------------------|
+| `--space-xs` … `--space-xl`                     | `0.25rem`, `0.5rem`, `1rem`, `1.5rem`, `2rem` |
+| `--duration-fast`, `--duration-normal`          | `150ms`, `200ms`              |
+| `--ease`                                        | `ease-in-out`                 |
+| `--z-tooltip`, `--z-navbar`                     | `10`, `100`                   |
+| `--shadow-strength`                             | `1` light, `2.5` dark         |
+
+Every shadow in `$shadow-map` multiplies its alpha by `--shadow-strength`, so shadows stay visible on the dark theme. Hand-written shadows should do the same: `rgb(0 0 0 / calc(15% * var(--shadow-strength)))`.
+
 ## Storybook
 
 `app/stories/styling.ts` provides:
@@ -139,4 +167,3 @@ Story args are flat (`variant`, `color`…). The story's `render` gathers them b
 ## Caveats
 
 - Single-weight fonts (Bebas Neue, Bytesized, VT323) and fonts without an italic get a faked bold or italic from the browser.
-- Shadows use black at low opacity, so they're faint on the dark theme.

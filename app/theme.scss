@@ -32,6 +32,23 @@
 
   --error: #FE4A49;
   --on-error: var(--text);
+
+  // Shadows: multiplies the alpha in $shadow-map. Dark surfaces need more to be visible.
+  --shadow-strength: 1;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --ease: ease-in-out;
+
+  // Stacking order, lowest first.
+  --z-tooltip: 10;
+  --z-navbar: 100;
 }
 
 // overrites values to dark mode using css variables.
@@ -48,4 +65,6 @@
   --accent: #FF47A0;
 
   --error: #CE4760;
+
+  --shadow-strength: 2.5;
 }

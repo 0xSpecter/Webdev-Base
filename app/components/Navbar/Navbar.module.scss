@@ -3,7 +3,7 @@
 .navbar {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 100;
+  z-index: var(--z-navbar);
   margin: $navbar-margin;
   min-height: $navbar-height;
   padding: 0.25rem 2rem;
@@ -12,14 +12,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0 1rem;
+  gap: 0 var(--space-md);
 
   background: var(--primary);
   color: var(--on-primary);
-  box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
+  box-shadow: 0 2px 12px rgb(0 0 0 / calc(15% * var(--shadow-strength)));
 
   @include phone {
-    padding-inline: 1.5rem;
+    padding-inline: var(--space-lg);
   }
 }
 
@@ -33,13 +33,13 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-md);
 
   @include phone {
     display: none;
     flex-basis: 100%;
     flex-direction: column;
-    padding-block: 0.5rem;
+    padding-block: var(--space-sm);
 
     &.open {
       display: flex;
@@ -55,11 +55,9 @@
   background: none;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease;
 
-  &:hover {
-    background: rgb(0 0 0 / 10%);
-  }
+  @include hover-overlay;
+  @include focus-ring;
 }
 
 .link {

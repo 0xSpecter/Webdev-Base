@@ -1,3 +1,5 @@
+@use "constants" as *;
+
 .themeToggle {
   display: flex;
   align-items: center;
@@ -10,16 +12,8 @@
   background: none;
   color: inherit;
   cursor: pointer;
-  transition: background-color 0.15s ease;
-
-  &:hover {
-    background: rgb(0 0 0 / 10%);
-  }
-
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
+  @include hover-overlay;
+  @include focus-ring;
 }
 
 .svg {

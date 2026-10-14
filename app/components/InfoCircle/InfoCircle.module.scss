@@ -1,3 +1,6 @@
+@use "constants" as *;
+@use "sass:map";
+
 .infoCircle {
   display: flex;
   align-items: center;
@@ -5,33 +8,39 @@
   flex: none;
   padding: 0;
   aspect-ratio: 1;
-  border: 2px solid currentColor;
+  border: 2px solid;
   border-radius: 50%;
-  background: none;
-  color: var(--text-muted);
   cursor: help;
+  // Muted until hovered or focused.
+  opacity: 0.6;
+  transition: opacity var(--duration-fast) var(--ease);
 
   &:hover,
   &:focus-visible {
-    color: var(--text);
+    opacity: 1;
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 2px;
+  @include focus-ring(var(--text));
+
+  @include basic-colors;
+  @include basic-variants;
+  @include basic-shadows;
+
+  // The surface colors are too faint for a ring and icon, so the default is the text color.
+  &.styling-default {
+    --color: var(--text);
+    --on-color: var(--background);
   }
-}
 
-.sm {
-  width: 1rem;
-}
+  // Without a filled background the icon is the colored part, not the text color.
+  &.styling-outline,
+  &.styling-ghost {
+    color: var(--color);
+  }
 
-.md {
-  width: 1.25rem;
-}
-
-.lg {
-  width: 1.75rem;
+  @include sizes using ($key) {
+    width: calc(map.get($size-map, $key) * 1.25);
+  }
 }
 
 .icon {

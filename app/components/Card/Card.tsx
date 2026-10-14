@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./Card.module.scss";
-import { stylingClassNames, type Styling } from "~/style";
+import { classNames, type Styling } from "~/style";
 
 export type CardStyling = Pick<Styling, "variant" | "color" | "rounded" | "shadow">;
 
@@ -21,7 +21,7 @@ export default function Card({
 	},
 }: CardProps) {
 	return (
-		<div className={`${styles.card} ${stylingClassNames(styles, styling)} ${className}`}>
+		<div className={classNames(styles, styling, styles.card, className)}>
 			{children}
 		</div>
 	);
