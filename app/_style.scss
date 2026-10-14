@@ -1,0 +1,223 @@
+@use "sass:map";
+
+// filled: background, no border.
+// border: background and border.
+// outline: no background but has border.
+// ghost: no background, no border.
+$variant_keys: 'filled', 'border', 'outline', 'ghost';
+$rounded_keys: 'rounded', 'sharp', 'pill';
+$color_keys: 'default', 'primary', 'secondary', 'tertiary', 'accent', 'error';
+$font_keys: 'mono', 'paragraph', 'header', 'code', 'data', 'comic', 'pixel', 'kode', 'byte';
+$weight_keys: 'light', 'normal', 'medium', 'semibold', 'bold', 'verybold';
+$slant_keys: 'upright', 'italic';
+$size_keys: "xs", "sm", "md", "lg", "xl", "xxl", "xxxl";
+$shadow_keys: 'flat', 'soft', 'raised', 'floating', 'sunken';
+
+$color-map: (
+  default: var(--surface-alt),
+  primary: var(--primary),
+  secondary: var(--secondary),
+  tertiary: var(--tertiary),
+  accent: var(--accent),
+  error: var(--error),
+);
+
+$on-color-map: (
+  default: var(--text),
+  primary: var(--on-primary),
+  secondary: var(--on-secondary),
+  tertiary: var(--on-tertiary),
+  accent: var(--on-accent),
+  error: var(--on-error),
+);
+
+$size-map: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  md: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  xxl: 1.8rem,
+  xxxl: 2.5rem,
+);
+
+$rounded-map: (
+  rounded: 0.75rem,
+  sharp: 0px,
+  pill: 100px,
+);
+
+$font-map: (
+  mono: var(--font),
+  paragraph: var(--font-paragraph),
+  header: var(--font-header),
+  code: var(--font-code),
+  data: var(--font-data),
+  comic: var(--font-comic),
+  pixel: var(--font-pixel),
+  kode: var(--font-kode),
+  byte: var(--font-byte),
+);
+
+$weight-map: (
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  verybold: 800,
+);
+
+$slant-map: (
+  upright: normal,
+  italic: italic,
+);
+
+$shadow-map: (
+  flat: none,
+  soft: 0 1px 3px rgb(0 0 0 / 12%),
+  raised: 0 4px 8px rgb(0 0 0 / 15%),
+  floating: 0 12px 24px rgb(0 0 0 / 20%),
+  sunken: inset 0 2px 4px rgb(0 0 0 / 15%),
+);
+
+// What each variant does with the --color / --on-color set by basic-colors.
+$variants-background-map: (
+  filled: var(--color),
+  border: var(--surface),
+  outline: transparent,
+  ghost: transparent,
+);
+
+$variants-border-map: (
+  filled: transparent,
+  border: var(--color),
+  outline: var(--color),
+  ghost: transparent,
+);
+
+$variants-text-map: (
+  filled: var(--on-color),
+  border: var(--text),
+  outline: var(--text),
+  ghost: var(--text),
+);
+
+// Prefixed so styling classes never collide with a component's own classes. Must match stylingPrefix in style.ts.
+$styling-prefix: 'styling-';
+
+@mixin classes($keys) {
+  @each $key in $keys {
+    &.#{$styling-prefix}#{$key} {
+      @content($key);
+    }
+  }
+}
+
+@mixin variants {
+  @include classes($variant_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin colors {
+  @include classes($color_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin sizes {
+  @include classes($size_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin roundeds {
+  @include classes($rounded_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin fonts {
+  @include classes($font_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin weights {
+  @include classes($weight_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin slants {
+  @include classes($slant_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin shadows {
+  @include classes($shadow_keys) using ($key) {
+    @content($key);
+  }
+}
+
+@mixin basic-texts {
+  @include fonts using ($key) {
+    font-family: map.get($font-map, $key);
+  }
+
+  @include weights using ($key) {
+    font-weight: map.get($weight-map, $key);
+  }
+
+  @include slants using ($key) {
+    font-style: map.get($slant-map, $key);
+  }
+}
+
+// Sets --color and --on-color; basic-variants decides where they go.
+@mixin basic-colors {
+  @include colors using ($key) {
+    --color: #{map.get($color-map, $key)};
+    --on-color: #{map.get($on-color-map, $key)};
+  }
+}
+
+// Expects a border width and style on the component, e.g. `border: 2px solid`.
+@mixin basic-variants {
+  @include variants using ($key) {
+    background: map.get($variants-background-map, $key);
+    border-color: map.get($variants-border-map, $key);
+    color: map.get($variants-text-map, $key);
+  }
+}
+
+@mixin basic-rounded {
+  @include roundeds using ($key) {
+    border-radius: map.get($rounded-map, $key);
+  }
+}
+
+// Font size only; padding is up to the component.
+@mixin basic-sizes {
+  @include sizes using ($key) {
+    font-size: map.get($size-map, $key);
+  }
+}
+
+@mixin basic-shadows {
+  @include shadows using ($key) {
+    box-shadow: map.get($shadow-map, $key);
+  }
+}
+
+// Every basic at once. Include inside the component's root class.
+@mixin basics {
+  @include basic-colors;
+  @include basic-variants;
+  @include basic-rounded;
+  @include basic-sizes;
+  @include basic-shadows;
+  @include basic-texts;
+}

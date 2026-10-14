@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import Button from "./Button";
-import { stylingArgs, stylingArgTypes, type StylingArgs, collectStyle } from "~/stories/styling";
+import { stylingArgTypes, type StylingArgs, collectStyle } from "~/stories/styling";
 
 const meta = {
 	title: "Components/Button",
@@ -10,14 +10,21 @@ const meta = {
 	},
 	args: {
 		children: "Button",
-		...stylingArgs(),
+		variant: "filled",
+		color: "primary",
+		size: "md",
+		rounded: "rounded",
+		font: "mono",
+		weight: "normal",
+		slant: "upright",
+		shadow: "flat",
 	},
 	argTypes: {
 		...stylingArgTypes,
 		onClick: { action: "clicked" },
 	},
-	render: ({ variant, color, size, rounded, font, weight, slant, ...props }) => (
-		<Button {...props} styling={collectStyle(variant, color, size, rounded, font, weight, slant)} />
+	render: ({ variant, color, size, rounded, font, weight, slant, shadow, ...props }) => (
+		<Button {...props} styling={collectStyle(variant, color, size, rounded, font, weight, slant, shadow)} />
 	),
 } satisfies Meta<StylingArgs<typeof Button>>;
 

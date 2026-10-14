@@ -34,6 +34,8 @@
   --on-error: var(--text);
 }
 
+// overrites values to dark mode using css variables.
+// if confused, just read it top down, it makes sense trust.
 :root.dark {
   --color-derive: #1A202C;
 

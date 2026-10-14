@@ -1,11 +1,13 @@
 import type { ReactNode } from "react";
 import styles from "./Card.module.scss";
-import { createCN, type Styling } from "~/utils";
+import { stylingClassNames, type Styling } from "~/style";
+
+export type CardStyling = Pick<Styling, "variant" | "color" | "rounded" | "shadow">;
 
 interface CardProps {
 	children?: ReactNode,
 	className?: string,
-	styling?: Styling,
+	styling?: CardStyling,
 }
 
 export default function Card({
@@ -14,15 +16,12 @@ export default function Card({
 	styling = {
 		variant: 'border',
 		color: 'default',
-		size: 'md',
 		rounded: 'rounded',
-		font: 'mono',
-		weight: 'normal',
-		slant: 'upright',
+		shadow: 'flat',
 	},
 }: CardProps) {
 	return (
-		<div className={`${styles.card} ${createCN(styles, styling)} ${className}`}>
+		<div className={`${styles.card} ${stylingClassNames(styles, styling)} ${className}`}>
 			{children}
 		</div>
 	);

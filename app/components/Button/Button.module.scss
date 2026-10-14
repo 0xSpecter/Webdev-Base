@@ -26,81 +26,83 @@
 }
 
 // Neutral: the surface colors are too faint to use as a ring or text color.
-.default {
+.styling-default {
   --color: var(--surface-alt);
   --on-color: var(--text);
   --text-color: var(--text);
 }
 
-.primary {
+.styling-primary {
   --color: var(--primary);
   --on-color: var(--on-primary);
 }
 
-.secondary {
+.styling-secondary {
   --color: var(--secondary);
   --on-color: var(--on-secondary);
 }
 
-.tertiary {
+.styling-tertiary {
   --color: var(--tertiary);
   --on-color: var(--on-tertiary);
 }
 
-.accent {
+.styling-accent {
   --color: var(--accent);
   --on-color: var(--on-accent);
 }
 
-.filled {
+.styling-filled {
   background: var(--color);
   color: var(--on-color);
 }
 
-.border {
+.styling-border {
   background: var(--surface);
   color: var(--text);
   box-shadow: inset 0 0 0 2px var(--color);
 }
 
-.outline {
+.styling-outline {
   background: transparent;
   color: var(--text-color);
   box-shadow: inset 0 0 0 2px var(--color);
 }
 
-.sm {
+.styling-sm {
   padding: 0.2rem 0.6rem;
   font-size: 0.875rem;
   border-radius: 0.4rem;
 }
 
-.md {
+.styling-md {
   padding: 0.3rem 0.8rem;
   font-size: 1rem;
   border-radius: 0.5rem;
 }
 
-.lg {
+.styling-lg {
   padding: 0.5rem 1.25rem;
   font-size: 1.125rem;
   border-radius: .5rem;
 }
 
-.xl {
+.styling-xl {
   padding: 0.75rem 1.75rem;
   font-size: 1.25rem;
   border-radius: .65rem;
 }
 
-.xxl {
+.styling-xxl {
   padding: 1rem 2.25rem;
   font-size: 1.8rem;
   border-radius: .75rem;
 }
 
-.sharp {
+.styling-sharp {
   border-radius: 0;
 }
 
-@include fonts;
+.button {
+  @include basic-texts;
+}

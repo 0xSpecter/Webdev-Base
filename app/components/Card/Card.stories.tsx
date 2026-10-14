@@ -1,6 +1,9 @@
+import type { ComponentProps } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Card from "./Card";
-import { stylingArgs, stylingArgTypes, type StylingArgs, collectStyle } from "~/stories/styling";
+import Card, { type CardStyling } from "./Card";
+import { getStylingArgTypes } from "~/stories/styling";
+
+type CardArgs = ComponentProps<typeof Card> & CardStyling;
 
 const meta = {
 	title: "Components/Card",
@@ -10,15 +13,17 @@ const meta = {
 	},
 	args: {
 		children: "Card",
-		...stylingArgs("border", "default"),
+		variant: "border",
+		color: "default",
+		rounded: "rounded",
+		shadow: "flat",
 	},
-	argTypes: {
-		...stylingArgTypes,
+	argTypes: getStylingArgTypes("variant", "color", "rounded", "shadow"),
+	render: ({ variant, color, rounded, shadow, ...props }) => {
+		const styling: CardStyling = { variant, color, rounded, shadow };
+		return <Card {...props} styling={styling} />;
 	},
-	render: ({ variant, color, size, rounded, font, weight, slant, ...props }) => (
-		<Card {...props} styling={collectStyle(variant, color, size, rounded, font, weight, slant)} />
-	),
-} satisfies Meta<StylingArgs<typeof Card>>;
+} satisfies Meta<CardArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
